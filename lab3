@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 3: Синтаксис JavaScript</title>
+</head>
+<body>
+
+<h1>Практична робота 3: Синтаксис JavaScript</h1>
+
+<p id="output"></p>
+
+<!-- 1. Виведення за допомогою document.write() -->
+<button onclick="writeMessage()">Записати повідомлення за допомогою document.write()</button>
+
+<!-- 2. Виведення за допомогою window.alert() -->
+<button onclick="showAlert()">Показати alert()</button>
+
+<!-- 3. Виведення в консоль -->
+<button onclick="logToConsole()">Записати в консоль</button>
+
+<!-- 4. Виведення за допомогою innerHTML -->
+<button onclick="changeInnerHTML()">Змінити innerHTML</button>
+
+<!-- 5. Видалити останній символ -->
+<p id="text">Це приклад тексту, який змінюється.</p>
+<button onclick="removeLastCharacter()">Видалити останній символ</button>
+
+<script>
+// 1. Виведення за допомогою document.write()
+function writeMessage() {
+    document.write("Це повідомлення було виведене за допомогою document.write().");
+}
+
+// 2. Виведення за допомогою window.alert()
+function showAlert() {
+    alert("Це повідомлення було виведене за допомогою alert().");
+}
+
+// 3. Виведення в консоль
+function logToConsole() {
+    console.log("Це повідомлення було виведене в консоль за допомогою console.log().");
+}
+
+// 4. Виведення за допомогою innerHTML
+function changeInnerHTML() {
+    document.getElementById("output").innerHTML = "Це повідомлення було виведене за допомогою innerHTML.";
+}
+
+// 5. Видалення останнього символу з тексту
+function removeLastCharacter() {
+    var textElement = document.getElementById("text");
+    textElement.innerHTML = textElement.innerHTML.slice(0, -1); // Видаляє останній символ
+}
+
+// 6. Функція для роботи з об'єктами
+function getProperty(obj, property) {
+    return obj[property];
+}
+
+function addProperty(obj, property, value) {
+    obj[property] = value;
+    return true;
+}
+
+function removeProperty(obj, property) {
+    delete obj[property];
+    return true;
+}
+
+function getFullName(firstName, lastName) {
+    return firstName + " " + lastName;
+}
+
+function getLengthOfWord(word) {
+    return word.length;
+}
+
+function getLengthOfTwoWords(word1, word2) {
+    return word1.length + word2.length;
+}
+
+function isEven(number) {
+    return number % 2 === 0;
+}
+
+function isGreaterThan(number, value) {
+    return number > value;
+}
+
+function isSameLength(word1, word2) {
+    return word1.length === word2.length;
+}
+
+function isEvenAndGreaterThanTen(number) {
+    return number % 2 === 0 && number > 10;
+}
+
+function computeAreaOfATriangle(base, height) {
+    return 0.5 * base * height;
+}
+</script>
+
+</body>
+</html>
