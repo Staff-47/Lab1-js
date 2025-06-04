@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <link href="styles/style.css" rel="stylesheet" type="text/css">
+    <title>Лабораторна_02-JS01</title>
+</head>
+<body>
+
+<h1 class="myclass n1">Mozilla - це класно!!!</h1>
+
+<p>Важлива інформація не буде відображена, поки не завантажиться скрипт.</p>
+<p>...Важлива інформація!</p>
+
+<div class="temp m1">Скільки буде у JavaScript 0.1 + 0.2 = ?</div>
+
+<!-- Підключаємо скрипт з атрибутом async -->
+<script async src="https://js.cx/hello/ads.js?speed=0.1"></script>
+
+<h1 class="myclass n2"></h1>
+
+<img src="images/firefox-icon.png" alt="The Firefox logo: a flaming fox surrounding the Earth." style="width:200px">
+<div class="temp m0"></div>
+
+<!-- Вбудований скрипт -->
+<script>
+    console.log(0.1 + 0.2);
+    var sum = 0.1 + 0.2;
+    var result = document.getElementsByClassName("m1")[0];
+    result.innerHTML = "В JavaScript " + "<br>" + "0.1 + 0.2 = " + sum;
+    result.style.color = '#2d264a';
+</script>
+
+<p>Mozilla являє собою глобальне товариство:</p>
+<ul>
+    <li>розробників;</li>
+    <li>дизайнерів;</li>
+    <li>мислителів.</li>
+</ul>
+
+<p>Всі вони працюють разом, щоб зробити Інтернет інтерактивним та доступним для всіх людей.</p>
+
+<p>Прочитайте маніфест розробників <a href="https://www.mozilla.org/en-US/about/manifesto/">Mozilla</a> щоб дізнатися про цінності та принципи, які погладені в основу цієї місії.</p>
+
+<!-- Підключення додаткових скриптів -->
+<script defer src="scripts/prompt.js"></script>
+<script defer src="scripts/alert.js"></script>
+<script defer src="scripts/confirm.js"></script>
+
+</body>
+</html>
+
+
+//js
+//----- Об’єкту myTxt присвоїти значення селекторів 'h1.n2'
+var myTxt = document.querySelector('h1.n2');
+
+//----- Завантажуємо цикл для зміни розміру шрифта об’єкту myFont[i]
+var myFont = document.querySelectorAll('.myclass');
+for (var i = 0; i < myFont.length; i++) {
+    myFont[i].style.fontSize = '35px';
+}
+
+//----- Записуємо в об’єкт myTxt значення 'Привіт, студенте!'
+myTxt.innerHTML = 'Привіт, cтуденте!';
+
+//----- Присвоюємо змінній person значення, яке введе користувач
+var person = prompt('Як Вас звати');
+if (person != null) {
+    myTxt.innerHTML = "Я вітаю Вас " + person + "!" + "<br>" + " ";
+}
+
+//----- Змінюємо колір об’єкта myTxt за допомогою DOM
+myTxt.style.color = 'red';
+
+//----- Метод confirm() виводить на екран вікно підтвердження
+var r = confirm("Готові гризти граніт науки?");
+if (r == true) {
+    myTxt.innerHTML = "ВПЕРЕД ДО ЗНАНЬ!";
+} else {
+    myTxt.innerHTML = "Мені дуже сумно!";
+}
+
+var myImage = document.querySelector('img');
+var j = 0;
+
+myImage.onclick = function () {
+    j++;
+    var mySrc = myImage.getAttribute('src');
+    if (mySrc === 'images/firefox-icon.png') {
+        myImage.setAttribute('src', 'images/firefox-icon_bw.png');
+    } else {
+        myImage.setAttribute('src', 'images/firefox-icon.png');
+    }
+    if (j == 3) {
+        myImage.remove();
+        document.write("<h1>Вітаю!</h1><h2>Завдання виконано!</h2>");
+    }
+}
+
+myTxt.innerHTML += "<br>" + "Клацніть мишею по емблемі FireFox!";
+
+Створення світлофора
+html
+Копіювати
+Редагувати
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Світлофор</title>
+    <style>
+        #traffic-light {
+            width: 100px;
+            height: 300px;
+            background-color: #333;
+            border-radius: 10px;
+            padding: 10px;
+        }
+
+        .light {
+            width: 80px;
+            height: 80px;
+            margin: 10px auto;
+            border-radius: 50%;
+        }
+
+        #red { background-color: red; }
+        #yellow { background-color: yellow; }
+        #green { background-color: green; }
+    </style>
+</head>
+<body>
+    <div id="traffic-light">
+        <div id="red" class="light"></div>
+        <div id="yellow" class="light"></div>
+        <div id="green" class="light"></div>
+    </div>
+
+    <button onclick="changeLight('red')">Червоний</button>
+    <button onclick="changeLight('yellow')">Жовтий</button>
+    <button onclick="changeLight('green')">Зелений</button>
+
+    <script>
+        function changeLight(color) {
+            // Reset all lights
+            document.getElementById('red').style.backgroundColor = 'gray';
+            document.getElementById('yellow').style.backgroundColor = 'gray';
+            document.getElementById('green').style.backgroundColor = 'gray';
+
+            // Activate the selected light
+            document.getElementById(color).style.backgroundColor = color;
+        }
+    </script>
+</body>
+</html>
