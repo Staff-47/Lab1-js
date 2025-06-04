@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Практична робота 1: JavaScript</title>
+    <style>
+        h1 {
+            font: Monaco, Courier, monospace 28px;
+            color: #618ad2;
+        }
+
+        #blinking {
+            font-size: 13px;
+            color: #9E1AD2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Підключення внутрішніх скриптів JavaScript</h1>
+    <p id="blinking">Підключення скриптів можна виконувати різними способами. <br/> Один із способів полягає в описі скриптів прямо всередині HTML-сторінки.</p>
+
+    <!-- JavaScript код для анімації -->
+    <script>
+        var p = document.getElementById("blinking");
+
+        setInterval(function () {
+            // Отримуємо поточний розмір шрифта через getComputedStyle
+            var currentFontSize = window.getComputedStyle(p).fontSize;
+
+            // Якщо розмір шрифта 13px, збільшуємо його до 18px
+            if (currentFontSize == "13px") {
+                p.style.fontSize = "18px";
+                p.style.color = '#D25424';
+            } else {
+                p.style.fontSize = "13px";
+                p.style.color = '#9E1AD2';
+            }
+        }, 2000); // зміна кожні 2 секунди
+    </script>
+    
+    <!-- Кнопка для відновлення сторінки -->
+    <button id="resetButton">Відновити сторінку</button>
+
+    <script>
+        // Кнопка для видалення заголовка та відновлення початкового вигляду
+        document.querySelector('#resetButton').onclick = function() {
+            var h1 = document.querySelector('h1');
+            h1.remove(); // Видалення заголовка
+
+            // Відновлення початкового вигляду
+            var button = document.createElement('button');
+            button.textContent = "Привітати СВІТ";
+            document.body.appendChild(button);
+
+            button.onclick = myFunction; // Відновлення функції для кнопки
+        };
+
+        // Функція для створення заголовка
+        function myFunction() {
+            var h1 = document.createElement('h1');
+            h1.className = "big"; // Клас
+            h1.id = "big"; // ID
+            document.body.appendChild(h1);
+
+            h1.appendChild(document.createTextNode("Я ВІТАЮ ТЕБЕ СВІТ!!!"));
+
+            // Застосування стилів
+            document.getElementsByTagName("h1")[0].style.color = "red";
+            document.getElementById("big").style.fontSize = "4em";
+            document.getElementById("big").style.textAlign = "center";
+        }
+    </script>
+</body>
+</html>
