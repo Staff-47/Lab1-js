@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 9: Робота з формами в JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            background-color: yellow;
+            color: black;
+        }
+        p {
+            background-color: white;
+            color: red;
+        }
+        input, select {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Практична робота 9: Робота з формами в JavaScript</h1>
+
+<!-- Завдання 1. Замовлення меблів -->
+<h2>Замовлення меблів</h2>
+
+<form name="furnitureOrder" method="POST" action="orderConfirmation.php">
+    <label for="item">Виберіть виріб:</label>
+    <select name="item" id="item">
+        <option value="Шафа">Шафа</option>
+        <option value="Стіл">Стіл</option>
+        <option value="Сервант">Сервант</option>
+    </select><br><br>
+
+    <label for="material">Виберіть матеріал:</label>
+    <select name="material" id="material">
+        <option value="Дуб">Дуб</option>
+        <option value="Горіх">Горіх</option>
+        <option value="Бук">Бук</option>
+    </select><br><br>
+
+    <label for="quantity">Кількість:</label>
+    <input type="number" name="quantity" id="quantity"><br><br>
+
+    <input type="submit" value="ВВЕДЕННЯ" onclick="checkOrder()">
+</form>
+
+<script>
+// Завдання 1: Перевірка введених даних
+function checkOrder() {
+    let item = document.forms["furnitureOrder"]["item"].value;
+    let material = document.forms["furnitureOrder"]["material"].value;
+    let quantity = document.forms["furnitureOrder"]["quantity"].value;
+
+    if (item == "" || material == "" || quantity == "") {
+        alert("Всі поля повинні бути заповнені!");
+        return false;
+    }
+
+    alert("Ваше замовлення успішно підтверджено!");
+    return true;
+}
+</script>
+
+<!-- Завдання 2. Обчислення тригонометричних функцій -->
+<h2>Обчислення тригонометричних функцій</h2>
+
+<form name="trigForm">
+    <label for="angle">Введіть кут (в градусах):</label>
+    <input type="number" id="angle" name="angle" onchange="calculateTrigFunction()"><br><br>
+
+    <label for="function">Виберіть функцію:</label>
+    <select id="function" name="function" onchange="calculateTrigFunction()">
+        <option value="sin">sin</option>
+        <option value="cos">cos</option>
+        <option value="tan">tan</option>
+    </select><br><br>
+
+    <label for="result">Результат:</label>
+    <input type="text" id="result" readonly><br><br>
+
+    <button type="button" onclick="calculateTrigFunction()">Обчислити</button>
+</form>
+
+<script>
+// Завдання 2: Обчислення тригонометричних функцій
+function calculateTrigFunction() {
+    let angle = document.forms["trigForm"]["angle"].value;
+    let func = document.forms["trigForm"]["function"].value;
+
+    // Переводимо градуси в радіани
+    let radians = angle * (Math.PI / 180);
+
+    // Формуємо вираз для обчислення функції
+    let result;
+    if (func === "sin") {
+        result = Math.sin(radians);
+    } else if (func === "cos") {
+        result = Math.cos(radians);
+    } else if (func === "tan") {
+        result = Math.tan(radians);
+    }
+
+    // Виводимо результат
+    document.getElementById("result").value = result;
+}
+</script>
+
+</body>
+</html>
