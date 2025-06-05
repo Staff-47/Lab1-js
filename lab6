@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 6: Застосування масивів та об'єктів JavaScript</title>
+</head>
+<body>
+
+<h1>Практична робота 6: Застосування масивів та об'єктів JavaScript</h1>
+
+<!-- Завдання 1: Виведення поточної дати та часу -->
+<p>1. Поточний час і дата: <span id="current-time"></span></p>
+
+<script>
+// Завдання 1: Виведення поточної дати та часу
+function displayCurrentTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+    const month = now.getMonth() + 1; // Місяць починається з 0
+    const date = now.getDate();
+    const year = now.getFullYear();
+    document.getElementById("current-time").innerHTML = `Час: ${hours}:${minutes}:${seconds} <br>Дата: ${month}/${date}/${year}`;
+}
+displayCurrentTime();
+</script>
+
+<!-- Завдання 2: Показати годинник -->
+<p>2. Працюючий годинник:</p>
+<form name="clock">
+    Час: <input type="text" name="time" size="8" value=""><br>
+    Дата: <input type="text" name="date" size="8" value=""><br>
+</form>
+
+<script>
+// Завдання 2: Показ годинника
+function clock() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
+
+    let timeStr = `${hours}:${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    document.clock.time.value = timeStr;
+
+    const date = now.getDate();
+    const month = now.getMonth() + 1;
+    const year = now.getFullYear();
+    let dateStr = `${month}/${date < 10 ? "0" : ""}${date}/${year}`;
+    document.clock.date.value = dateStr;
+
+    setTimeout(clock, 1000);
+}
+clock();
+</script>
+
+<!-- Завдання 3: Використання масиву для виведення елементів -->
+<p>3. Виведення елементів масиву:</p>
+<p id="array-output"></p>
+
+<script>
+// Завдання 3: Виведення елементів масиву
+const myArray = ["first element", "second element", "third element"];
+let output = "";
+for (let i = 0; i < myArray.length; i++) {
+    output += myArray[i] + "<br>";
+}
+document.getElementById("array-output").innerHTML = output;
+</script>
+
+<script>
+// Завдання 1.1: Функція для обчислення площі прямокутника
+function computeAreaOfARectangle(length, width) {
+    return length * width;
+}
+document.body.innerHTML += `<p>Площа прямокутника: ${computeAreaOfARectangle(5, 10)}</p>`;
+
+// Завдання 1.2: Функція для обчислення площі кола
+function computeAreaOfACircle(radius) {
+    return Math.PI * Math.pow(radius, 2);
+}
+document.body.innerHTML += `<p>Площа кола: ${computeAreaOfACircle(7)}</p>`;
+
+// Завдання 1.3: Функція для обчислення числа, піднятого до експоненти
+function computePower(base, exponent) {
+    return Math.pow(base, exponent);
+}
+document.body.innerHTML += `<p>Число піднесене до експоненти: ${computePower(2, 3)}</p>`;
+
+// Завдання 1.4: Функція для обчислення квадратного кореня числа
+function computeSquareRoot(number) {
+    return Math.sqrt(number);
+}
+document.body.innerHTML += `<p>Квадратний корінь числа: ${computeSquareRoot(16)}</p>`;
+
+// Завдання 1.5: Функція для отримання суми довжин трьох слів
+function getLengthOfThreeWords(word1, word2, word3) {
+    return word1.length + word2.length + word3.length;
+}
+document.body.innerHTML += `<p>Сума довжин трьох слів: ${getLengthOfThreeWords("apple", "banana", "cherry")}</p>`;
+
+// Завдання 1.6: Функція для об'єднання двох масивів
+function joinArrays(arr1, arr2) {
+    return arr1.concat(arr2);
+}
+document.body.innerHTML += `<p>Об'єднаний масив: ${JSON.stringify(joinArrays([1, 2], [3, 4]))}</p>`;
+
+// Завдання 1.7: Функція для добутку елементів масиву за ключем
+function getProductOfAllElementsAtProperty(obj, key) {
+    if (!Array.isArray(obj[key])) return 0;
+    return obj[key].reduce((product, num) => product * num, 1);
+}
+document.body.innerHTML += `<p>Добуток елементів за ключем: ${getProductOfAllElementsAtProperty({ numbers: [2, 3, 4] }, "numbers")}</p>`;
+
+// Завдання 1.8: Функція для обчислення суми цифр числа
+function sumDigits(number) {
+    let digits = Math.abs(number).toString().split('');
+    return digits.reduce((sum, digit) => sum + parseInt(digit), 0);
+}
+document.body.innerHTML += `<p>Сума цифр числа: ${sumDigits(-1234)}</p>`;
+
+// Завдання 1.9: Функція для пошуку найкоротшого слова серед змішаних елементів
+function findShortestWordAmongMixedElements(arr) {
+    let words = arr.filter(item => typeof item === "string");
+    return words.length ? words.reduce((shortest, current) => current.length < shortest.length ? current : shortest) : '';
+}
+document.body.innerHTML += `<p>Найкоротше слово серед змішаних елементів: ${findShortestWordAmongMixedElements([4, 'two', 2, "three"])}</p>`;
+
+// Завдання 1.10: Функція для знаходження найменшого числа серед змішаних елементів
+function findSmallestNumberAmongMixedElements(arr) {
+    let numbers = arr.filter(item => typeof item === "number");
+    return numbers.length ? Math.min(...numbers) : '';
+}
+document.body.innerHTML += `<p>Найменше число серед змішаних елементів: ${findSmallestNumberAmongMixedElements([4, 'two', 2, "three"])}</p>`;
+
+// Завдання 1.11: Функція для обчислення залишку від ділення
+function modulo(a, b) {
+    if (b === 0) return NaN;
+    return a - Math.floor(a / b) * b;
+}
+document.body.innerHTML += `<p>Залишок від ділення: ${modulo(10, 3)}</p>`;
+
+// Завдання 1.12: Перевернути кожен фрагмент з п символів у рядку
+function reverseFragments(str, p) {
+    let result = '';
+    for (let i = 0; i < str.length; i += p) {
+        result += str.slice(i, i + p).split('').reverse().join('');
+    }
+    return result;
+}
+document.body.innerHTML += `<p>Перевернуті фрагменти рядка: ${reverseFragments("abcdefghi", 3)}</p>`;
+
+// Завдання 1.13: Знайти єдине парне чи непарне число
+function findUniqueEvenOdd(arr) {
+    let even = arr.filter(num => num % 2 === 0);
+    let odd = arr.filter(num => num % 2 !== 0);
+    return even.length === 1 ? even[0] : (odd.length === 1 ? odd[0] : null);
+}
+document.body.innerHTML += `<p>Єдине парне чи непарне число: ${findUniqueEvenOdd([2, 3, 5, 7, 9])}</p>`;
+
+// Завдання 1.14: Пара чисел, що дають суму
+function findPairSum(arr, sum) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] + arr[j] === sum) return [arr[i], arr[j]];
+        }
+    }
+    return null;
+}
+document.body.innerHTML += `<p>Пара чисел, що дають суму: ${JSON.stringify(findPairSum([1, 2, 3, 4], 6))}</p>`;
+
+// Завдання 1.15: Перевірка на паліндром
+function isPalindrome(str) {
+    return str === str.split('').reverse().join('');
+}
+document.body.innerHTML += `<p>Перевірка на паліндром: ${isPalindrome("madam") ? "Так" : "Ні"}</p>`;
+
+// Завдання 1.16: Бінарний пошук
+function binarySearch(arr, target) {
+    let low = 0;
+    let high = arr.length - 1;
+    while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
+        if (arr[mid] === target) return mid;
+        if (arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+document.body.innerHTML += `<p>Результат бінарного пошуку: ${binarySearch([1, 2, 3, 4, 5], 3)}</p>`;
+
+</script>
+
+</body>
+</html>
