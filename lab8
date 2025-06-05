@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 8: Обробка подій в JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            background-color: yellow;
+            color: black;
+        }
+        p {
+            background-color: white;
+            color: red;
+        }
+        div {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+        }
+        #k1 {
+            position: absolute;
+            left: 50px;
+            top: 200px;
+            width: 300px;
+            height: 100px;
+            background-color: blue;
+        }
+        #k2 {
+            position: relative;
+            left: 50px;
+            top: 25px;
+            width: 200px;
+            height: 50px;
+            background-color: yellow;
+        }
+    </style>
+</head>
+<body>
+
+<h2 id="heading">П'ять подій з мишкою</h2>
+<p id="paragraph">Клацніть на мене мишкою</p>
+<p id="p2">На цьому тексті натисніть, потримайте і відпустіть ліву кнопку мишки</p>
+<p id="p3">Повільно проведіть курсором мишки по цій напису</p>
+
+<script>
+// Завдання 1. Зміна властивостей при натисканні на елементи
+
+// Клацання на заголовок (Збільшення шрифта, зміна кольору)
+document.getElementById("heading").onclick = function() {
+    let currentColor = this.style.color;
+    this.style.color = (currentColor === "black") ? "white" : "black";
+    this.style.backgroundColor = (this.style.backgroundColor === "yellow") ? "blue" : "yellow";
+    this.style.fontSize = (this.style.fontSize === "48pt") ? "initial" : "48pt";
+};
+
+// Клацання на перший параграф (Зміна кольору фону та шрифта)
+document.getElementById("paragraph").onclick = function() {
+    let currentColor = this.style.color;
+    this.style.color = (currentColor === "black") ? "white" : "black";
+    this.style.backgroundColor = (this.style.backgroundColor === "blue") ? "red" : "blue";
+};
+
+// Клацання на другий параграф (Фон стає зеленим при натисканні, жовтим при відпусканні)
+document.getElementById("p2").onmousedown = function() {
+    this.style.backgroundColor = "green";
+};
+document.getElementById("p2").onmouseup = function() {
+    this.style.backgroundColor = "yellow";
+};
+
+// Курсор мишки на третьому параграфі (Фон стає червоним при попаданні на елемент і блакитним при відпусканні)
+document.getElementById("p3").onmouseover = function() {
+    this.style.backgroundColor = "red";
+};
+document.getElementById("p3").onmouseout = function() {
+    this.style.backgroundColor = "blue";
+};
+</script>
+
+<!-- Завдання 2. Запобігання спливанню події -->
+
+<div id="k1">
+    <div id="k2">Зміна кольорів внутрішнього та зовнішнього прямокутника</div>
+</div>
+
+<script>
+// Для кожного елемента, що викликає подію, додаємо window.event.cancelBubble = true
+
+function rodEl(evt) {
+    var e = evt || window.event; // e - це об'єкт event
+    var elem = e.target || e.srcElement; // elem - елемент, на якому відбулася подія
+    var id1 = elem.id;
+    var z1 = document.getElementById(id1);
+
+    switch (id1) {
+        case "k1": // Зміна кольору зовнішнього прямокутника
+            var z = z1.style.backgroundColor;
+            z = (z !== "red") ? "red" : "green";
+            z1.style.backgroundColor = z;
+            break;
+
+        case "k2": // Зміна кольору внутрішнього прямокутника
+            var z = z1.style.backgroundColor;
+            z = (z !== 'rgb(255, 0, 255)') ? 'rgb(255, 0, 255)' : 'rgb(0, 255, 255)';
+            z1.style.backgroundColor = z;
+            break;
+
+        case "B": // Зміна кольору фону документа
+            var z = z1.style.backgroundColor;
+            z = (z !== 'rgb(190, 190, 190)') ? 'rgb(190, 190, 190)' : 'rgb(0, 190, 190)';
+            z1.style.backgroundColor = z;
+            break;
+
+        case "HH": // Зміна кольору слова "Колір"
+            var z = document.all.HH.style.color;
+            if (z === 'rgb(170, 0, 170)' || z === '#aa00aa') {
+                z = '#00ffff';
+            } else {
+                z = '#aa00aa';
+            }
+            document.all.HH.style.color = z;
+            break;
+    }
+    window.event.cancelBubble = true; // Запобігання спливанню події
+}
+
+document.getElementById("B").onclick = rodEl;
+document.getElementById("k1").onclick = rodEl;
+document.getElementById("k2").onclick = rodEl;
+document.getElementById("HH").onclick = rodEl;
+</script>
+
+</body>
+</html>
