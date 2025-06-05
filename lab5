@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 5: Функції JavaScript</title>
+</head>
+<body>
+
+<h1>Практична робота 5: Функції JavaScript</h1>
+
+<!-- Завдання 1.1: computeAreaOfARectangle -->
+<p>1.1. Площа прямокутника: <span id="rectangle-area"></span></p>
+
+<!-- Завдання 1.2: computeAreaOfACircle -->
+<p>1.2. Площа кола: <span id="circle-area"></span></p>
+
+<!-- Завдання 1.3: computePower -->
+<p>1.3. Число підняте до експоненти: <span id="power-result"></span></p>
+
+<!-- Завдання 1.4: computeSquareRoot -->
+<p>1.4. Квадратний корінь числа: <span id="sqrt-result"></span></p>
+
+<!-- Завдання 1.5: getLengthOfThreeWords -->
+<p>1.5. Сума довжин трьох слів: <span id="words-length"></span></p>
+
+<!-- Завдання 1.6: joinArrays -->
+<p>1.6. Об'єднаний масив: <span id="joined-arrays"></span></p>
+
+<!-- Завдання 1.7: getProductOfAllElementsAtProperty -->
+<p>1.7. Добуток елементів за ключем: <span id="product-result"></span></p>
+
+<!-- Завдання 1.8: sumDigits -->
+<p>1.8. Сума цифр числа: <span id="sum-of-digits"></span></p>
+
+<!-- Завдання 1.9: findShortestWordAmongMixedElements -->
+<p>1.9. Найкоротше слово серед змішаних елементів: <span id="shortest-word"></span></p>
+
+<!-- Завдання 1.10: findSmallestNumberAmongMixedElements -->
+<p>1.10. Найменше число серед змішаних елементів: <span id="smallest-number"></span></p>
+
+<!-- Завдання 1.11: modulo -->
+<p>1.11. Залишок від ділення: <span id="modulo-result"></span></p>
+
+<!-- Завдання 1.12: Reverse each fragment -->
+<p>1.12. Перевернуті фрагменти рядка: <span id="reversed-fragments"></span></p>
+
+<!-- Завдання 1.13: Find even or odd number -->
+<p>1.13. Єдине парне чи непарне число: <span id="unique-even-odd"></span></p>
+
+<!-- Завдання 1.14: Pair of numbers adding up to a sum -->
+<p>1.14. Пара чисел, сума яких дає результат: <span id="pair-sum"></span></p>
+
+<!-- Завдання 1.15: Check if strings are palindromes -->
+<p>1.15. Перевірка на паліндром: <span id="palindrome-check"></span></p>
+
+<!-- Завдання 1.16: Binary search -->
+<p>1.16. Результат бінарного пошуку: <span id="binary-search-result"></span></p>
+
+<script>
+// 1.1. Функція для обчислення площі прямокутника
+function computeAreaOfARectangle(length, width) {
+    return length * width;
+}
+document.getElementById("rectangle-area").innerHTML = computeAreaOfARectangle(5, 10); // 50
+
+// 1.2. Функція для обчислення площі кола
+function computeAreaOfACircle(radius) {
+    return Math.PI * Math.pow(radius, 2);
+}
+document.getElementById("circle-area").innerHTML = computeAreaOfACircle(7); // Площа кола
+
+// 1.3. Функція для піднесення числа до експоненти
+function computePower(base, exponent) {
+    return Math.pow(base, exponent);
+}
+document.getElementById("power-result").innerHTML = computePower(2, 3); // 8
+
+// 1.4. Функція для обчислення квадратного кореня числа
+function computeSquareRoot(number) {
+    return Math.sqrt(number);
+}
+document.getElementById("sqrt-result").innerHTML = computeSquareRoot(16); // 4
+
+// 1.5. Функція для обчислення суми довжин трьох слів
+function getLengthOfThreeWords(word1, word2, word3) {
+    return word1.length + word2.length + word3.length;
+}
+document.getElementById("words-length").innerHTML = getLengthOfThreeWords("apple", "banana", "cherry");
+
+// 1.6. Функція для об'єднання двох масивів
+function joinArrays(arr1, arr2) {
+    return arr1.concat(arr2);
+}
+document.getElementById("joined-arrays").innerHTML = JSON.stringify(joinArrays([1, 2], [3, 4]));
+
+// 1.7. Функція для добутку всіх елементів масиву за даним ключем
+function getProductOfAllElementsAtProperty(obj, key) {
+    if (!Array.isArray(obj[key])) return 0;
+    return obj[key].reduce((product, num) => product * num, 1);
+}
+document.getElementById("product-result").innerHTML = getProductOfAllElementsAtProperty({ numbers: [2, 3, 4] }, "numbers"); // 24
+
+// 1.8. Функція для суми цифр числа
+function sumDigits(number) {
+    let digits = Math.abs(number).toString().split('');
+    return digits.reduce((sum, digit) => sum + parseInt(digit), 0);
+}
+document.getElementById("sum-of-digits").innerHTML = sumDigits(-1234); // 10
+
+// 1.9. Функція для пошуку найкоротшого слова серед змішаних елементів
+function findShortestWordAmongMixedElements(arr) {
+    let words = arr.filter(item => typeof item === "string");
+    return words.length ? words.reduce((shortest, current) => current.length < shortest.length ? current : shortest) : '';
+}
+document.getElementById("shortest-word").innerHTML = findShortestWordAmongMixedElements([4, 'two', 2, "three"]);
+
+// 1.10. Функція для знаходження найменшого числа серед змішаних елементів
+function findSmallestNumberAmongMixedElements(arr) {
+    let numbers = arr.filter(item => typeof item === "number");
+    return numbers.length ? Math.min(...numbers) : '';
+}
+document.getElementById("smallest-number").innerHTML = findSmallestNumberAmongMixedElements([4, 'two', 2, "three"]);
+
+// 1.11. Функція для обчислення залишку від ділення
+function modulo(a, b) {
+    if (b === 0) return NaN;
+    return a - Math.floor(a / b) * b;
+}
+document.getElementById("modulo-result").innerHTML = modulo(10, 3); // 1
+
+// 1.12. Перевернути кожен фрагмент з п символів у рядку
+function reverseFragments(str, p) {
+    let result = '';
+    for (let i = 0; i < str.length; i += p) {
+        result += str.slice(i, i + p).split('').reverse().join('');
+    }
+    return result;
+}
+document.getElementById("reversed-fragments").innerHTML = reverseFragments("abcdefghi", 3); // "cbafedihg"
+
+// 1.13. Знайти єдине парне або непарне число
+function findUniqueEvenOdd(arr) {
+    let even = arr.filter(num => num % 2 === 0);
+    let odd = arr.filter(num => num % 2 !== 0);
+    return even.length === 1 ? even[0] : (odd.length === 1 ? odd[0] : null);
+}
+document.getElementById("unique-even-odd").innerHTML = findUniqueEvenOdd([2, 3, 5, 7, 9]);
+
+// 1.14. Пара чисел, що дають суму
+function findPairSum(arr, sum) {
+    for (let i = 0; i < arr.length; i++) {
+        for (let j = i + 1; j < arr.length; j++) {
+            if (arr[i] + arr[j] === sum) return [arr[i], arr[j]];
+        }
+    }
+    return null;
+}
+document.getElementById("pair-sum").innerHTML = JSON.stringify(findPairSum([1, 2, 3, 4], 6)); // [2, 4]
+
+// 1.15. Перевірка на паліндром
+function isPalindrome(str) {
+    return str === str.split('').reverse().join('');
+}
+document.getElementById("palindrome-check").innerHTML = isPalindrome("madam") ? "Так" : "Ні";
+
+// 1.16. Бінарний пошук
+function binarySearch(arr, target) {
+    let low = 0;
+    let high = arr.length - 1;
+    while (low <= high) {
+        let mid = Math.floor((low + high) / 2);
+        if (arr[mid] === target) return mid;
+        if (arr[mid] < target) low = mid + 1;
+        else high = mid - 1;
+    }
+    return -1;
+}
+document.getElementById("binary-search-result").innerHTML = binarySearch([1, 2, 3, 4, 5], 3); // 2
+
+</script>
+
+</body>
+</html>
