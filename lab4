@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 4: Управління виконанням програми JavaScript</title>
+</head>
+<body>
+
+<h1>Практична робота 4: Управління виконанням програми JavaScript</h1>
+
+<!-- Завдання 1.1: findMinLengthOfThreeWords -->
+<p>1.1. Мінімальна довжина з трьох слів: <span id="min-length"></span></p>
+
+<!-- Завдання 1.2: filterOddElements -->
+<p>1.2. Непарні елементи масиву: <span id="odd-elements"></span></p>
+
+<!-- Завдання 1.3: getLengthOfShortestElement -->
+<p>1.3. Довжина самого короткого елемента масиву: <span id="shortest-element"></span></p>
+
+<!-- Завдання 1.4: joinArrayOfArrays -->
+<p>1.4. Об'єднаний масив з масивів: <span id="joined-array"></span></p>
+
+<!-- Завдання 1.5: findSmallestNumberAmongMixedElements -->
+<p>1.5. Найменше число в масиві з різними елементами: <span id="smallest-number"></span></p>
+
+<!-- Завдання 1.6: computeSummationToN -->
+<p>1.6. Сума чисел до N: <span id="sum-to-n"></span></p>
+
+<!-- Завдання 1.7: convertScoreToGrade -->
+<p>1.7. Оцінка на основі балів: <span id="grade"></span></p>
+
+<!-- Завдання 1.8: getLongestOfThreeWords -->
+<p>1.8. Найдовше з трьох слів: <span id="longest-word"></span></p>
+
+<!-- Завдання 1.9: multiply -->
+<p>1.9. Добуток чисел: <span id="multiplication"></span></p>
+
+<!-- Завдання 1.10: computeSumBetween -->
+<p>1.10. Сума між двома числами: <span id="sum-between"></span></p>
+
+<script>
+// 1.1. Функція для визначення мінімальної довжини з трьох слів
+function findMinLengthOfThreeWords(word1, word2, word3) {
+    return Math.min(word1.length, word2.length, word3.length);
+}
+document.getElementById("min-length").innerHTML = findMinLengthOfThreeWords("apple", "banana", "pear");
+
+// 1.2. Функція для фільтрації непарних елементів масиву
+function filterOddElements(arr) {
+    return arr.filter(num => num % 2 !== 0);
+}
+document.getElementById("odd-elements").innerHTML = JSON.stringify(filterOddElements([1, 2, 3, 4, 5]));
+
+// 1.3. Функція для визначення довжини самого короткого елемента масиву
+function getLengthOfShortestElement(arr) {
+    return Math.min(...arr.map(element => element.length));
+}
+document.getElementById("shortest-element").innerHTML = getLengthOfShortestElement(["apple", "orange", "kiwi"]);
+
+// 1.4. Функція для об'єднання масивів
+function joinArrayOfArrays(arr) {
+    return arr.flat();
+}
+document.getElementById("joined-array").innerHTML = JSON.stringify(joinArrayOfArrays([[1, 2], [3, 4], [5]]));
+
+// 1.5. Функція для знаходження найменшого числа серед змішаних елементів масиву
+function findSmallestNumberAmongMixedElements(arr) {
+    let numbers = arr.filter(item => typeof item === "number");
+    return numbers.length ? Math.min(...numbers) : 0;
+}
+document.getElementById("smallest-number").innerHTML = findSmallestNumberAmongMixedElements([1, "a", 3, "b", 0]);
+
+// 1.6. Функція для обчислення суми чисел від 1 до N
+function computeSummationToN(n) {
+    return (n * (n + 1)) / 2;
+}
+document.getElementById("sum-to-n").innerHTML = computeSummationToN(4); // 1 + 2 + 3 + 4 = 10
+
+// 1.7. Функція для перетворення рейтингу на оцінку
+function convertScoreToGrade(score) {
+    if (score > 100 || score < 0) {
+        return 'INVALID SCORE';
+    } else if (score >= 90) {
+        return 'A';
+    } else if (score >= 80) {
+        return 'B';
+    } else if (score >= 70) {
+        return 'C';
+    } else if (score >= 60) {
+        return 'D';
+    } else {
+        return 'F';
+    }
+}
+document.getElementById("grade").innerHTML = convertScoreToGrade(85); // Should return 'B'
+
+// 1.8. Функція для отримання найдовшого з трьох слів
+function getLongestOfThreeWords(word1, word2, word3) {
+    let words = [word1, word2, word3];
+    return words.reduce((longest, current) => current.length > longest.length ? current : longest);
+}
+document.getElementById("longest-word").innerHTML = getLongestOfThreeWords("apple", "banana", "kiwi");
+
+// 1.9. Функція для множення чисел без оператора "*"
+function multiply(a, b) {
+    let result = 0;
+    for (let i = 0; i < b; i++) {
+        result += a;
+    }
+    return result;
+}
+document.getElementById("multiplication").innerHTML = multiply(3, 4); // 3 * 4 = 12
+
+// 1.10. Функція для обчислення суми чисел між двома цілими числами
+function computeSumBetween(a, b) {
+    if (a > b) return 0;
+    let sum = 0;
+    for (let i = a; i <= b; i++) {
+        sum += i;
+    }
+    return sum;
+}
+document.getElementById("sum-between").innerHTML = computeSumBetween(1, 4); // 1 + 2 + 3 = 6
