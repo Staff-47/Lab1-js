@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота 10: Робота з зображеннями</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        h2 {
+            background-color: yellow;
+            color: black;
+        }
+        p {
+            background-color: white;
+            color: red;
+        }
+        input, select {
+            margin: 5px;
+        }
+        #k1 {
+            position: absolute;
+            left: 50px;
+            top: 200px;
+            width: 300px;
+            height: 100px;
+            background-color: blue;
+        }
+        #k2 {
+            position: relative;
+            left: 50px;
+            top: 25px;
+            width: 200px;
+            height: 50px;
+            background-color: yellow;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Практична робота 10: Робота з зображеннями</h1>
+
+<!-- Завдання 1: Динамічне завантаження зображень -->
+<h2>Перегляд фотографій</h2>
+
+<form name="photoForm">
+    <label for="imageSelect">Виберіть фотографію:</label>
+    <select name="imageSelect" id="imageSelect" onchange="changeImage(this)">
+        <option value="les">Ліс</option>
+        <option value="sea">Море</option>
+        <option value="mountains">Гори</option>
+    </select>
+</form>
+
+<p><img id="imageDisplay" src="les.jpg" width="400" height="300" alt="Фотографія"></p>
+
+<script>
+// Завантаження зображень в масив
+var photos = new Array();
+photos["les"] = new Image(400, 300);
+photos["les"].src = "les.jpg";
+photos["sea"] = new Image(400, 300);
+photos["sea"].src = "sea.jpg";
+photos["mountains"] = new Image(400, 300);
+photos["mountains"].src = "mountains.jpg";
+
+// Функція для зміни зображення
+function changeImage(list) {
+    var selectedValue = list.options[list.selectedIndex].value;
+    document.getElementById("imageDisplay").src = photos[selectedValue].src;
+}
+</script>
+
+<!-- Завдання 2: Малювання еліпса за допомогою Canvas -->
+<h2>Малювання еліпса (Canvas)</h2>
+
+<form name="ellipseForm">
+    <label for="a">Велика піввісь (a):</label>
+    <input type="number" id="a" value="200"><br><br>
+    <label for="b">Мала піввісь (b):</label>
+    <input type="number" id="b" value="100"><br><br>
+    <button type="button" onclick="drawEllipse()">Малювати еліпс</button>
+</form>
+
+<canvas id="ellipseCanvas" width="500" height="500"></canvas>
+
+<script>
+// Функція для малювання еліпса
+function drawEllipse() {
+    var a = parseInt(document.getElementById('a').value);
+    var b = parseInt(document.getElementById('b').value);
+    var canvas = document.getElementById('ellipseCanvas');
+    var ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Очистка перед малюванням
+    ctx.beginPath();
+    
+    // Параметричне рівняння еліпса
+    for (var t = 0; t <= 2 * Math.PI; t += 0.01) {
+        var x = a * Math.cos(t) + canvas.width / 2; // Центруємо еліпс
+        var y = b * Math.sin(t) + canvas.height / 2; // Центруємо еліпс
+        ctx.lineTo(x, y);
+    }
+    
+    ctx.closePath();
+    ctx.stroke(); // Малюємо еліпс
+}
+</script>
+
+<!-- Завдання 3: Малювання еліпса за допомогою SVG -->
+<h2>Малювання еліпса (SVG)</h2>
+
+<form name="svgEllipseForm">
+    <label for="a">Велика піввісь (a):</label>
+    <input type="number" id="a" value="200"><br><br>
+    <label for="b">Мала піввісь (b):</label>
+    <input type="number" id="b" value="100"><br><br>
+    <button type="button" onclick="drawSvgEllipse()">Малювати еліпс</button>
+</form>
+
+<svg id="ellipseSvg" width="500" height="500" style="border: 1px solid black;"></svg>
+
+<script>
+// Функція для малювання еліпса за допомогою SVG
+function drawSvgEllipse() {
+    var a = parseInt(document.getElementById('a').value);
+    var b = parseInt(document.getElementById('b').value);
+    var svg = document.getElementById('ellipseSvg');
+    
+    // Очистка перед малюванням
+    svg.innerHTML = '';
+    
+    // Створення еліпса
+    var ellipse = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+    ellipse.setAttribute('cx', 250); // Центр по осі X
+    ellipse.setAttribute('cy', 250); // Центр по осі Y
+    ellipse.setAttribute('rx', a); // Велика піввісь
+    ellipse.setAttribute('ry', b); // Мала піввісь
+    ellipse.setAttribute('stroke', 'black'); // Колір обводки
+    ellipse.setAttribute('fill', 'none'); // Без заливки
+    svg.appendChild(ellipse);
+}
+</script>
+
+<!-- Завдання 4: Малювання еліпса з використанням мозаїки -->
+<h2>Малювання еліпса з використанням мозаїки</h2>
+
+<form name="mosaicEllipseForm">
+    <label for="a">Велика піввісь (a):</label>
+    <input type="number" id="a" value="200"><br><br>
+    <label for="b">Мала піввісь (b):</label>
+    <input type="number" id="b" value="100"><br><br>
+    <button type="button" onclick="drawMosaicEllipse()">Малювати еліпс</button>
+</form>
+
+<canvas id="mosaicCanvas" width="500" height="500" style="border: 1px solid black;"></canvas>
+
+<script>
+// Функція для малювання еліпса за допомогою мозаїки
+function drawMosaicEllipse() {
+    var a = parseInt(document.getElementById('a').value);
+    var b = parseInt(document.getElementById('b').value);
+    var canvas = document.getElementById('mosaicCanvas');
+    var ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Очистка перед малюванням
+    
+    var image = new Image();
+    image.src = "dot.png"; // Маленька картинка для мозаїки
+    
+    image.onload = function() {
+        var x, y, t = 0;
+        ctx.beginPath();
+        while (t <= 2 * Math.PI) {
+            x = a * Math.cos(t) + canvas.width / 2;
+            y = b * Math.sin(t) + canvas.height / 2;
+            ctx.drawImage(image, x, y, 5, 5); // Мозаїка 5x5 пікселів
+            t += 0.01;
+        }
+        ctx.closePath();
+    };
+}
+</script>
+
+</body>
+</html>
